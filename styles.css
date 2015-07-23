@@ -1,0 +1,41 @@
+﻿   body {
+            background-color:#f3e0e0;
+            margin:5px;
+            padding:5px;
+        }
+
+        #header {
+            height:200px;
+            margin:10px;
+            padding:10px;
+            border:1px solid #0ff;
+            border-radius:5px;
+        }
+        header h1 {
+                text-align:center;
+        }
+
+        #menu ul {
+            display:block;
+            background-color:#5455fc;
+            color:#baf190;
+        }
+            #menu ul li {
+                    display:inline;
+            }
+        #content {
+            height:500px;
+            margin:10px;
+            padding:10px;
+            border:1px solid #0ff;
+            border-radius:5px;
+        }
+
+        #footer {
+            text-align:center;
+            font-weight:bold;
+            margin:10px;
+            padding:10px;
+            border:1px solid #0ff;
+            border-radius:5px;
+        }

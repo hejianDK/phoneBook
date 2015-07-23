@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html"; charset="utf-8">
+    <title></title>
+    <script class ="jsbin" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+                    var edit=document.getElementById('edit');
+                    $(edit).blur(function(){
+                        localStorage.setItem('todoData', this.innerHTML);
+                    });
+                    if(localStorage.getItem('todoData')){
+                        edit.innerHTML = localStorage.getItem('todoData');
+                    }
+                }
+        );
+    </script>
+</head>
+
+<body>
+<section>
+    <ul id="edit" contenteditable="true" >
+        <li></li>
+    </ul>
+</section>
+</body>
+</html>

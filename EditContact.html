@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Contact Manage</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+        var data = [{ContactId: 1,FirstName: 'Kou', Mobile: '111111',State: 'NJ'}];
+        var gid;
+        window.onload = function () {
+
+            document.getElementById("formPanel").style.display = "none";
+
+            loadGrid();
+        }
+
+        function loadGrid() {
+            var table = "<table><tr><th>Id</th><th>FirstName</th><th>Mobile</th><th>State</th><th>Actions</th></tr>";
+
+            data.forEach(function (entry) {
+                table += "<tr><td>" + entry.ContactId + "</td><td>" + entry.FirstName + "</td><td>" + entry.Mobile + "</td><td>" + entry.State + "</td><td><a href='javascript:void(0)' onclick='getProductById(" + entry.ContactId + ")'>View</a>|<a href='javascript:void(0)' onclick='getProductEdit(" + entry.pcontactId + ")'>Edit</a>|<a href='javascript:void(0)' onclick='getProductDelete(" + entry.contactId + ")'>Delete</a></td></tr>";
+            });
+
+            table += "</table>";
+            document.getElementById("grid").innerHTML = table;
+        }
+
+
+        function showForm() {
+            document.getElementById("isAdding").style.display = "block";
+            document.getElementById("isEditing").style.display = "none";
+            document.getElementById("isViewing").style.display = "none";
+
+
+            document.getElementById("gridPanel").style.display = "none";
+            document.getElementById("formPanel").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("formPanel").style.display = "none";
+            document.getElementById("gridPanel").style.display = "block";
+        }
+
+
+        function save() {
+            var ContactId = 0;
+            if (data.length > 0) {
+                ContactId = data.length + 1;
+            } else {
+                ContactId = 1;
+            }
+
+            var FirstName = document.getElementById("FirstName").value;
+            var Mobile = document.getElementById("Mobile").value;
+            var State = document.getElementById("State").value;
+
+            var contact = {
+                ContactId: ContactId,
+                FirstName: FirstName,
+                Mobile: Mobile,
+                State: State
+            };
+
+            data.push(contact);
+//            alert("Added...........");
+            closeForm();
+            loadGrid();
+
+        }
+
+        function update() {
+
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].contactId == gid-1) {
+                    data[i].FirstName = document.getElementById("FirstName").value;
+                    data[i].Mobile = document.getElementById("Mobile").value;
+                    data[i].State = document.getElementById("State").value;
+//                    var product = { productId: productId, productName: productName, productPrice: productPrice, category: productCategory };
+//                    data.push(product);
+                }
+            }
+
+            alert("Updated...........");
+            closeForm();
+            loadGrid();
+        }
+
+        function getProductById(id) {
+            showForm();
+
+            document.getElementById("isAdding").style.display = "none";
+            document.getElementById("isEditing").style.display = "none";
+            document.getElementById("isViewing").style.display = "block";
+
+
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].productId == id) {
+                    document.getElementById("FirstName").value = data[i].FirstName;
+                    document.getElementById("Mobile").value = data[i].Mobile;
+                    document.getElementById("State").value = data[i].State;
+                    break;
+                }
+            }
+        }
+
+        function getProductEdit(id) {
+
+            showForm();
+
+            document.getElementById("isAdding").style.display = "none";
+            document.getElementById("isEditing").style.display = "block";
+            document.getElementById("isViewing").style.display = "none";
+
+
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].productId == id) {
+                    document.getElementById("FirstName").value = data[i].FirstName;
+                    document.getElementById("Mobile").value = data[i].Mobile;
+                    document.getElementById("State").value = data[i].State;
+                    break;
+                }
+            }
+            gid = id+1;
+//            document.getElementById("productID").value = id;
+
+        }
+
+
+        function getProductDelete(id) {
+            for (var i = 0; i < data.length; i++) {
+                if ((i + 1) == id) {
+                    data[i] = data[i + 1];
+                    data[i].ContactId -= 1;
+                }
+            }
+            data.length = data.length - 1;
+
+            loadGrid();
+
+
+        }
+
+
+    </script>
+
+    <style>
+        table {
+            width: 100%;
+            height: 200px;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        table tr:first-child {
+            background-color: #c79b9b;
+            color: #00ff90;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+<section id="header">
+    <header>
+        <h1>Sample Portal...</h1>
+    </header>
+    <div style="float:right;">
+        <div id="anonymouspanel">
+            [Welcome Guest!] [<a href="login.html">Login</a>/[<a href="register.html">Register</a>]
+        </div>
+    </div>
+    <nav id="menu">
+        <ul>
+            <li>
+                <a href="Index.html">Home</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+            <li>
+                <a href="contact.html">contact</a>
+            </li>
+        </ul>
+    </nav>
+</section>
+
+
+<section id="content">
+    <header>
+        <h3>Main content here...</h3>
+    </header>
+    <div id="gridPanel">
+        <div>
+            <button type="button" onclick="showForm()">Add New</button>
+        </div>
+        <div id="grid">
+
+        </div>
+    </div>
+    <div id="formPanel">
+        <form>
+            <div>
+                <h3>Add New Contact</h3>
+            </div>
+            <div>
+                <label>FirstName</label>
+                <input type="text" id="FirstName"/>
+            </div>
+            <div>
+                <label>Mobile</label>
+                <input type="text" id="Mobile"/>
+            </div>
+            <div>
+                <label>State</label>
+                <input type="text" list="States" id="State"/>
+
+                <datalist id="statelist">
+                    <option value="NJ">NJ</option>
+                    <option value="NY">NY</option>
+                    <option value="CT">CT</option>
+                </datalist>
+            </div>
+            <div id="isAdding">
+                <button type="button" onclick="save()">Save</button>
+                &nbsp;
+                &nbsp;
+                <button type="button" onclick="closeForm()">Cancel</button>
+            </div>
+
+            <div id="isEditing">
+                <button type="button" onclick="update()">Update</button>
+                &nbsp;
+                &nbsp;
+                <button type="button" onclick="closeForm()">Cancel</button>
+            </div>
+            <div id="isViewing">
+                <button type="button" onclick="closeForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<section id="footer">
+    <footer>
+        &copy; Marlabs Inc-<span id="year"></span>
+    </footer>
+</section>
+
+
+</body>
+</html>

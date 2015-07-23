@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>CreateContactor</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        #box{
+            width:770px;
+            padding: 10px;
+            background-color: #ccc;
+            border-radius: 5px;
+            margin: auto;
+            overflow: auto;
+        }
+    </style>
+    <script class ="jsbin" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script >
+        window.onload = function () {
+            if (sessionStorage["user"] != null || sessionStorage["user"] != undefined) {
+                var user = JSON.parse(sessionStorage["user"]);
+                document.getElementById("lblusername").innerHTML = user.username;
+                document.getElementById("username").value = user.username;
+                document.getElementById("password").value = user.password;
+                document.getElementById("email").value = user.email;
+                document.getElementById("mobile").value = user.mobile;
+
+            } else {
+                document.location = "login.html";
+            }
+        }
+        function logout() {
+            sessionStorage.clear();
+            document.location = "login.html";
+        }
+
+//        var contacts = [];
+//
+//        function addContact() {
+//            var contactName = document.getElementById("contactName").value;
+//            var email = document.getElementById("email").value;
+//            var mobile = document.getElementById("mobile").value;
+//
+//
+//            if (localStorage["contacts"] != null && localStorage["contacts"] != undefined) {
+//                contacts = JSON.parse(localStorage["contacts"]);
+//                var contactId = contacts.length + 1;
+//                var contact = { contactId: contactId, contactName: contactName,  email: email, mobile: mobile };
+//                contacts.push(contact);
+//            } else {
+//                var contact = { contactId: 1, contactName: contactName, email: email, mobile: mobile };
+//                contacts.push(contact);
+//            }
+//
+//
+//            localStorage["contacts"] = JSON.stringify(contacts);
+////            document.location = "login.html";
+//        }
+//        function display(){
+//            var display_data = document.getElementById('display_data');
+//            display_data.innerHTML = "";
+//            for(var i = 0; i < localStorage.length; i++){
+//                var a = JSON.parse("contacts[i]");
+//                //var b = JSON.parse(sessionStorage.getItem(a));
+//                display_data.innerHTML += a;// + "-" +b +"<br>";
+//            }
+//
+//        }
+
+        $(function(){
+                    var edit=document.getElementById('edit');
+                    $(edit).blur(function(){
+                        localStorage.setItem('contactor', this.innerHTML);
+                    });
+                    if(localStorage.getItem('contactor')){
+                        edit.innerHTML = localStorage.getItem('contactor');
+                    }
+                }
+
+        );
+    </script>
+    <meta http-equiv="content-type" content="text/html"; charset="utf-8">
+</head>
+<body>
+<section id="header">
+    <header>
+        <h1>Sample Portal...</h1>
+    </header>
+    <div style="float:right;">
+        <div id="anonymouspanel">
+            [Welcome <span id="lblusername"></span>!] [<a href='javascript:void(0)' onclick="logout()">Logout</a>]
+        </div>
+    </div>
+    <nav id="menu">
+        <ul>
+            <li>
+                <a href="Index.html">Home</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+            <li>
+                <a href="contact.html">contact</a>
+            </li>
+        </ul>
+    </nav>
+</section>
+
+<section id="content">
+    <header>
+        <h3>Create Contact Here.......</h3>
+    </header>
+    <section>
+        <ul id="edit" contenteditable="true">
+            <li>Name  |  Phone_number  |  relatioinship</li>
+        </ul>
+    </section>
+    <!--<form id = "box">-->
+        <!--<div>-->
+            <!--<div>-->
+                <!--<label>ContactName</label>-->
+                <!--<input type="text" id="contactName" name="contactName" />-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<label>Email</label>-->
+                <!--<input type="text" id="email" name="email" />-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<label>Mobile</label>-->
+                <!--<input type="text" id="mobile" name="mobile" />-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<input type="button" value="Submit" onclick="addContact()" />-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</form>-->
+    <!--<section id = "display_data">-->
+
+
+    <!--</section>-->
+</section>
+
+<section id="footer">
+    <footer>
+        &copy; Marlabs Inc-<span id="year"></span>
+    </footer>
+</section>
+</body>
+</html>
